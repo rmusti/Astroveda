@@ -1,0 +1,8 @@
+{
+  "name": "Vedic Kundli Creator",
+  "description": "Calculate precision Vedic Kundli charts, planetary placements, and obtain daily horoscopes and personalized astro readings using Gemini.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
