@@ -375,9 +375,9 @@ export function calculateTropicalLagna(jd: number, latitude: number, longitude: 
   const θ = degToRad(lst);
   const φ = degToRad(latitude);
 
-  // Tan(Lagna) = sin(θ) / (cos(θ)*cos(ε) - tan(φ)*sin(ε))
-  const num = Math.sin(θ);
-  const den = Math.cos(θ) * Math.cos(epsilon) - Math.tan(φ) * Math.sin(epsilon);
+  // Tan(Lagna) = cos(θ) / (-sin(θ)*cos(ε) - tan(φ)*sin(ε))
+  const num = Math.cos(θ);
+  const den = -Math.sin(θ) * Math.cos(epsilon) - Math.tan(φ) * Math.sin(epsilon);
 
   let lagnaLong = radToDeg(Math.atan2(num, den));
   return normalizeDegrees(lagnaLong);
