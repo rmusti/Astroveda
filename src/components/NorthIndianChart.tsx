@@ -136,7 +136,7 @@ export const NorthIndianChart: React.FC<NorthIndianChartProps> = ({
 
   return (
     <div className="flex flex-col items-center w-full">
-      <div className="relative w-full max-w-[450px] aspect-square bg-slate-950 p-[12px] border border-slate-800">
+      <div className="relative w-full max-w-[450px] aspect-square bg-white dark:bg-slate-950 p-[12px] border border-slate-200 dark:border-slate-800 transition-colors">
         <svg
           viewBox="0 0 400 400"
           className="w-full h-full select-none cursor-pointer"
@@ -161,8 +161,8 @@ export const NorthIndianChart: React.FC<NorthIndianChartProps> = ({
                   points={house.points}
                   className={`transition-colors duration-300 ${
                     isHighlighted
-                      ? "fill-amber-955/10 stroke-amber-500 stroke-2"
-                      : "fill-slate-950 stroke-slate-800 hover:fill-slate-900/40"
+                      ? "fill-amber-500/15 dark:fill-amber-500/10 stroke-amber-600 dark:stroke-amber-500 stroke-2"
+                      : "fill-stone-50 dark:fill-slate-950 stroke-slate-300 dark:stroke-slate-800 hover:fill-amber-50/70 dark:hover:fill-slate-900/40"
                   }`}
                 />
 
@@ -204,13 +204,13 @@ export const NorthIndianChart: React.FC<NorthIndianChartProps> = ({
 
                       return (
                         <g key={p.name}>
-                          {/* Small dark rectangle behind text */}
+                          {/* Small rectangle behind text */}
                           <rect
                             x={house.textPos.x + dx - 10}
                             y={house.textPos.y + dy - 10}
                             width="20"
                             height="20"
-                            className="fill-slate-950 stroke-slate-800"
+                            className="fill-white dark:fill-slate-950 stroke-slate-300 dark:stroke-slate-800"
                           />
                           <text
                             x={house.textPos.x + dx}
@@ -218,11 +218,13 @@ export const NorthIndianChart: React.FC<NorthIndianChartProps> = ({
                             textAnchor="middle"
                             alignmentBaseline="middle"
                             className={`font-mono font-bold pointer-events-none ${
-                              p.isRetrograde ? "fill-red-400 text-[10px]" : "fill-amber-300 text-[10px]"
+                              p.isRetrograde
+                                ? "fill-red-600 dark:fill-red-400 text-[10px]"
+                                : "fill-amber-700 dark:fill-amber-300 text-[10px]"
                             }`}
                           >
                             {p.name.slice(0, 2)}
-                            {p.isRetrograde && <tspan className="text-[7px] text-red-500/80" dy="-4">*</tspan>}
+                            {p.isRetrograde && <tspan className="text-[7px] fill-red-600 dark:fill-red-500/80" dy="-4">*</tspan>}
                           </text>
                         </g>
                       );
@@ -238,8 +240,8 @@ export const NorthIndianChart: React.FC<NorthIndianChartProps> = ({
                   height="14"
                   className={`${
                     house.num === 1
-                      ? "fill-amber-500/10 stroke-amber-500"
-                      : "fill-slate-950 stroke-slate-800"
+                      ? "fill-amber-500/15 dark:fill-amber-500/10 stroke-amber-600 dark:stroke-amber-500"
+                      : "fill-white dark:fill-slate-950 stroke-slate-300 dark:stroke-slate-800"
                   }`}
                 />
                 <text
@@ -247,7 +249,7 @@ export const NorthIndianChart: React.FC<NorthIndianChartProps> = ({
                   y={house.textPos.y + (planets.length > 0 ? 18.5 : 0.5)}
                   textAnchor="middle"
                   alignmentBaseline="middle"
-                  className="font-mono text-[8px] font-bold fill-amber-500 pointer-events-none"
+                  className="font-mono text-[8px] font-bold fill-amber-700 dark:fill-amber-500 pointer-events-none"
                 >
                   {house.num}
                 </text>
@@ -262,19 +264,19 @@ export const NorthIndianChart: React.FC<NorthIndianChartProps> = ({
               y="-8"
               width="16"
               height="16"
-              className="fill-amber-500/10 stroke-amber-500/40"
+              className="fill-amber-500/15 dark:fill-amber-500/10 stroke-amber-600/50 dark:stroke-amber-500/40"
             />
           </g>
           <circle
             cx="200"
             cy="200"
             r="1.5"
-            className="fill-amber-500"
+            className="fill-amber-600 dark:fill-amber-500"
           />
         </svg>
       </div>
 
-      <p className="mt-3 text-[9px] font-mono text-slate-500 text-center tracking-widest uppercase selection:bg-slate-800">
+      <p className="mt-3 text-[9px] font-mono text-slate-500 text-center tracking-widest uppercase selection:bg-slate-200 dark:selection:bg-slate-800">
         ✦ INTERACTIVE CHART • CLICK ANY HOUSE SEGMENT TO INSPECT LORD DETAILS & ACTIVE DRISHTI ASPECTS ✦
       </p>
     </div>

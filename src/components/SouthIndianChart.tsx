@@ -14,29 +14,29 @@ interface SouthIndianChartProps {
   onSelectHouse: (houseNum: number | null) => void;
 }
 
-// Fixed mapping in South Indian style: Outer ring clockwise starting with Pisces at (0,0)
+// Fixed mapping in South Indian style: Outer ring clockwise starting with Meena (Pisces) at (0,0)
 // To make rendering robust, we'll map grid cells of a 4x4 layout.
 // Row and Column indexes for a 4x4 structure:
 interface GridBox {
-  rashiIndex: number; // 0 = Aries, 1 = Taurus... 11 = Pisces
+  rashiIndex: number; // 0 = Mesha, 1 = Vrushabha... 11 = Meena
   row: number; // 0 to 3
   col: number; // 0 to 3
   name: string;
 }
 
 const SOUTH_INDIAN_LAYOUT: GridBox[] = [
-  { rashiIndex: 11, row: 0, col: 0, name: "Pisces" },
-  { rashiIndex: 0, row: 0, col: 1, name: "Aries" },
-  { rashiIndex: 1, row: 0, col: 2, name: "Taurus" },
-  { rashiIndex: 2, row: 0, col: 3, name: "Gemini" },
-  { rashiIndex: 3, row: 1, col: 3, name: "Cancer" },
-  { rashiIndex: 4, row: 2, col: 3, name: "Leo" },
-  { rashiIndex: 5, row: 3, col: 3, name: "Virgo" },
-  { rashiIndex: 6, row: 3, col: 2, name: "Libra" },
-  { rashiIndex: 7, row: 3, col: 1, name: "Scorpio" },
-  { rashiIndex: 8, row: 3, col: 0, name: "Sagittarius" },
-  { rashiIndex: 9, row: 2, col: 0, name: "Capricorn" },
-  { rashiIndex: 10, row: 1, col: 0, name: "Aquarius" },
+  { rashiIndex: 11, row: 0, col: 0, name: "Meena" },
+  { rashiIndex: 0, row: 0, col: 1, name: "Mesha" },
+  { rashiIndex: 1, row: 0, col: 2, name: "Vrushabha" },
+  { rashiIndex: 2, row: 0, col: 3, name: "Mithuna" },
+  { rashiIndex: 3, row: 1, col: 3, name: "Karka" },
+  { rashiIndex: 4, row: 2, col: 3, name: "Simha" },
+  { rashiIndex: 5, row: 3, col: 3, name: "Kanya" },
+  { rashiIndex: 6, row: 3, col: 2, name: "Tula" },
+  { rashiIndex: 7, row: 3, col: 1, name: "Vrishchika" },
+  { rashiIndex: 8, row: 3, col: 0, name: "Dhanu" },
+  { rashiIndex: 9, row: 2, col: 0, name: "Makara" },
+  { rashiIndex: 10, row: 1, col: 0, name: "Kumbha" },
 ];
 
 export const SouthIndianChart: React.FC<SouthIndianChartProps> = ({
@@ -79,18 +79,18 @@ export const SouthIndianChart: React.FC<SouthIndianChartProps> = ({
 
   return (
     <div className="flex flex-col items-center w-full">
-      <div className="relative w-full max-w-[450px] aspect-square bg-slate-950 p-[12px] border border-slate-800">
+      <div className="relative w-full max-w-[450px] aspect-square bg-white dark:bg-slate-950 p-[12px] border border-slate-200 dark:border-slate-800 transition-colors">
         {/* Render a beautiful 4x4 Grid representation using CSS Grid instead of raw SVG paths */}
-        <div className="grid grid-cols-4 grid-rows-4 gap-1 w-full h-full bg-slate-900 p-1">
+        <div className="grid grid-cols-4 grid-rows-4 gap-1 w-full h-full bg-slate-200 dark:bg-slate-900 p-1 transition-colors">
           {/* Inner Central Space (Row 2, Col 2) */}
-          <div className="col-start-2 col-end-4 row-start-2 row-end-4 bg-slate-950 flex flex-col items-center justify-center p-3 text-center border border-slate-800">
-            <h4 className="text-amber-500 text-xs font-bold tracking-[0.2em] uppercase mb-1">
+          <div className="col-start-2 col-end-4 row-start-2 row-end-4 bg-stone-50 dark:bg-slate-950 flex flex-col items-center justify-center p-3 text-center border border-slate-300 dark:border-slate-800 transition-colors">
+            <h4 className="text-amber-600 dark:text-amber-500 text-xs font-bold tracking-[0.2em] uppercase mb-1">
               RASHI CHART
             </h4>
             <div className="text-[10px] text-slate-500 font-mono uppercase tracking-widest font-bold">
-              LAGNA: {data.lagna.rashi.slice(0, 3)}
+              LAGNA: {data.lagna.rashi}
             </div>
-            <div className="text-[10px] text-slate-650 mt-1 font-mono uppercase">
+            <div className="text-[10px] text-slate-400 dark:text-slate-600 mt-1 font-mono uppercase">
               {data.lagna.formattedLongitude.split(" ")[0]}
             </div>
           </div>
@@ -117,19 +117,19 @@ export const SouthIndianChart: React.FC<SouthIndianChartProps> = ({
                 onClick={() => onSelectHouse(selectedHouse === houseNum ? null : houseNum)}
                 className={`relative flex flex-col justify-between p-2 cursor-pointer transition-all duration-300 rounded-none border text-left ${
                   isHighlighted
-                    ? "bg-amber-900/15 border-amber-500 scale-[1.01] z-10"
-                    : "bg-slate-950 border-slate-850 hover:bg-slate-900/40"
+                    ? "bg-amber-50 dark:bg-amber-900/15 border-amber-500 scale-[1.01] z-10"
+                    : "bg-white dark:bg-slate-950 border-slate-200 dark:border-slate-800 hover:bg-amber-50/50 dark:hover:bg-slate-900/40"
                 }`}
               >
                 {/* Sign Name & House Number Indicator */}
-                <div className="flex justify-between items-start">
-                  <span className="font-mono font-bold text-[9px] text-slate-500 uppercase tracking-wider">
-                    {box.name.slice(0, 3)}
+                <div className="flex justify-between items-start gap-1">
+                  <span className="font-mono font-bold text-[8.5px] text-slate-500 uppercase tracking-tight truncate">
+                    {box.name}
                   </span>
-                  <span className={`font-mono font-bold text-[8px] px-1 rounded-none uppercase tracking-widest ${
+                  <span className={`font-mono font-bold text-[8px] px-1 rounded-none uppercase tracking-widest shrink-0 ${
                     houseNum === 1
-                      ? "bg-amber-500/15 text-amber-500 border border-amber-500/30"
-                      : "bg-slate-900 text-slate-500 border border-slate-800"
+                      ? "bg-amber-500/15 text-amber-700 dark:text-amber-500 border border-amber-500/30"
+                      : "bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-500 border border-slate-300 dark:border-slate-800"
                   }`}>
                     H{houseNum}
                   </span>
@@ -138,7 +138,7 @@ export const SouthIndianChart: React.FC<SouthIndianChartProps> = ({
                 {/* Lagna marker diagonal strike representation */}
                 {isLagnaBox && (
                   <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 rotate-12 flex items-center justify-center pointer-events-none">
-                    <span className="font-mono font-extrabold text-[12px] opacity-25 text-amber-500 uppercase tracking-widest">
+                    <span className="font-mono font-extrabold text-[12px] opacity-25 text-amber-600 dark:text-amber-500 uppercase tracking-widest">
                       ASC
                     </span>
                   </div>
@@ -152,17 +152,17 @@ export const SouthIndianChart: React.FC<SouthIndianChartProps> = ({
                       style={{ contentVisibility: "auto" }}
                       className={`font-mono text-[9px] font-bold px-1.5 py-0.5 rounded-none ${
                         p.isRetrograde
-                          ? "bg-red-950/20 text-red-500 border border-red-900/30"
-                          : "bg-slate-900 text-amber-500 border border-slate-800"
+                          ? "bg-red-50 dark:bg-red-950/20 text-red-600 dark:text-red-500 border border-red-200 dark:border-red-900/30"
+                          : "bg-amber-50 dark:bg-slate-900 text-amber-700 dark:text-amber-500 border border-amber-200 dark:border-slate-800"
                       }`}
                       title={`${p.name} (${PLANET_SANSKRIT[p.name]}) - ${p.formattedLongitude}`}
                     >
                       {p.name.slice(0, 2)}
-                      {p.isRetrograde && <span className="text-[7px] text-red-500">*</span>}
+                      {p.isRetrograde && <span className="text-[7px] text-red-600 dark:text-red-500">*</span>}
                     </span>
                   ))}
                   {planets.length === 0 && (
-                    <span className="text-[9px] text-slate-800 font-mono select-none">
+                    <span className="text-[9px] text-slate-300 dark:text-slate-800 font-mono select-none">
                       ∅
                     </span>
                   )}
@@ -171,7 +171,7 @@ export const SouthIndianChart: React.FC<SouthIndianChartProps> = ({
                 {/* ASC textual watermark for standard visibility */}
                 {isLagnaBox && (
                   <div className="absolute bottom-1 right-2 pointer-events-none">
-                    <span className="font-mono font-bold text-[8px] text-amber-500/60 uppercase">
+                    <span className="font-mono font-bold text-[8px] text-amber-600/70 dark:text-amber-500/60 uppercase">
                       ASC
                     </span>
                   </div>
@@ -182,7 +182,7 @@ export const SouthIndianChart: React.FC<SouthIndianChartProps> = ({
         </div>
       </div>
 
-      <p className="mt-3 text-[9px] font-mono text-slate-500 text-center tracking-widest uppercase selection:bg-slate-800">
+      <p className="mt-3 text-[9px] font-mono text-slate-500 text-center tracking-widest uppercase selection:bg-slate-200 dark:selection:bg-slate-800">
         ✦ INTERACTIVE CHART • CLICK ANY BOX SEGMENT TO INSPECT LORD DETAILS & ACTIVE DRISHTI ASPECTS ✦
       </p>
     </div>

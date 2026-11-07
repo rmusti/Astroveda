@@ -18,7 +18,7 @@ export interface KundliInputs {
 
 export type ChartStyle = "NORTH_INDIAN" | "SOUTH_INDIAN";
 
-export type ActiveTab = "chart" | "strengths" | "insights" | "horoscope";
+export type ActiveTab = "chart" | "strengths" | "yogas" | "dasha" | "insights" | "horoscope";
 
 export interface TransitState {
   isCalculating: boolean;
